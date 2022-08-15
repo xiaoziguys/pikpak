@@ -15,3 +15,11 @@ export const byteConvert = function(bytes:number) {
   }
   return bytes + ' ' + symbols[i]
 }
+
+export const getProxy = function () {
+  const proxyArray = JSON.parse(window.localStorage.getItem('proxy') || '[]')
+  if (proxyArray.length > 0) {
+    const index = Math.floor((Math.random() * proxyArray.length))
+    return proxyArray[index]
+  }
+}

@@ -122,7 +122,7 @@
         </div>
       </n-card>
     </n-modal>
-    
+
     <n-modal v-model:show="showImage">
       <n-card style="width: 100vw; height: 100vh;" :title="fileInfo ? fileInfo.name : '图片'">
         <template #header-extra>
@@ -135,7 +135,7 @@
         </div>
       </n-card>
     </n-modal>
-    
+
     <n-modal v-model:show="showName">
       <n-card style="width: 600px;" title="修改名称">
         <template #header-extra>
@@ -191,7 +191,7 @@
         </n-form>
       </n-card>
     </n-modal>
-    
+
     <n-modal v-model:show="showCopy">
       <n-card style="width: 600px;" title="复制链接">
         <template #header-extra>
@@ -243,7 +243,7 @@ import http, { notionHttp } from '../utils/axios'
 import { useRoute, useRouter } from 'vue-router'
 import { DataTableColumns, NDataTable, NTime, NEllipsis, NModal, NCard, NInput, NBreadcrumb, NBreadcrumbItem, NIcon, useThemeVars, NButton, NTooltip, NSpace, NScrollbar, NSpin, NDropdown, useDialog, NAlert, useNotification, NotificationReactive, NSelect, NForm, NFormItem, NTag, NText, NInputGroup } from 'naive-ui'
 import { CirclePlus, CircleX, Dots, Share, Copy as IconCopy, SwitchHorizontal, LetterA, ZoomQuestion } from '@vicons/tabler'
-import { byteConvert } from '../utils'
+import {byteConvert, getProxy} from '../utils'
 import PlyrVue from '../components/Plyr.vue'
 import TaskVue from '../components/Task.vue'
 import ClipboardJS from 'clipboard'
@@ -424,7 +424,7 @@ import axios from 'axios';
                 case 'base':
                   window.localStorage.setItem('pikpakUploadFolder', JSON.stringify(row))
                   break
-                case 'delete': 
+                case 'delete':
                   dialog.warning({
                       title: '警告',
                       content: '确定删除' + row.name  + '？',
@@ -833,7 +833,7 @@ import axios from 'axios';
     if(aria2Data.value.token) {
       postData.params.splice(0, 0, 'token:' + aria2Data.value.token)
     }
-    fetch(aria2Data.value.host, {
+    fetch((aria2Data.value.useProxy ? `${getProxy()}/` : '') + aria2Data.value.host, {
         method: 'POST',
         body: JSON.stringify(postData),
         headers: new Headers({
@@ -867,7 +867,7 @@ import axios from 'axios';
     if(aria2Data.value.token) {
       postData.params.splice(0, 0, 'token:' + aria2Data.value.token)
     }
-    fetch(aria2Data.value.host, {
+    fetch((aria2Data.value.useProxy ? `${getProxy()}/` : '') + aria2Data.value.host, {
         method: 'POST',
         body: JSON.stringify(postData),
         headers: new Headers({
@@ -891,7 +891,7 @@ import axios from 'axios';
       }
     }
   }
-  
+
   const batchMoveAll = (items:object) => {
     let text:string[] = []
     filesList.value.forEach((item:FileInfo) => {

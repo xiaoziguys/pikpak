@@ -12,7 +12,8 @@ export const version = '1.0.0'
 export const ariaData = {
   host: '',
   token: '',
-  dir: true
+  dir: true,
+  useProxy: true
 }
 
 export const account = {

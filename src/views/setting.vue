@@ -25,8 +25,15 @@
               <template #unchecked>选择文件夹时仅保存文件</template>
             </n-switch>
           </n-form-item>
+          <n-form-item label="文件夹设置：">
+            <n-switch v-model:value="aria2Data.useProxy" >
+              <template #checked>远程地址关闭代理</template>
+              <template #unchecked>远程地址开启代理</template>
+            </n-switch>
+            <div>如果用的远程地址且是http协议可以开启代理来防止浏览器拦截</div>
+          </n-form-item>
           <n-alert title="由于浏览器限制，请按下图设置开始混合模式" type="info"  v-if="aria2Data.host && aria2Data.host.indexOf('https://') === -1 && aria2Data.host.indexOf('http://localhost') == -1 && aria2Data.host.indexOf('http://127.0.0.1') === -1">
-            <img src="../assets/aria2-tip-1.png" alt=""> 
+            <img src="../assets/aria2-tip-1.png" alt="">
             <br />
             <br />
             <img src="../assets/aria2-tip-2.png" alt="">
@@ -85,6 +92,8 @@ import http from '../utils/axios'
 import { NForm, NFormItem, NButton, NInput, NCollapse, NCollapseItem, NSpace, NSwitch, useDialog, NAlert, NLog, NIcon } from 'naive-ui'
 import { ZoomQuestion } from '@vicons/tabler'
 import {proxy as proxyDefault} from '../config'
+import { getProxy } from '../utils'
+
 const logs = ref([
   '手机注册登陆',
   '添加推广下载',
@@ -99,7 +108,8 @@ const logs = ref([
 const aria2Data = ref({
   host: '',
   token: '',
-  dir: true
+  dir: true,
+  useProxy: true
 })
 const testAria2 = () => {
   let postData:any = {
@@ -111,7 +121,7 @@ const testAria2 = () => {
   if(aria2Data.value.token) {
     postData.params.splice(0, 0, 'token:' + aria2Data.value.token)
   }
-  fetch(aria2Data.value.host, {
+  fetch((aria2Data.value.useProxy ? `${getProxy()}/` : '') + aria2Data.value.host, {
       method: 'POST',
       body: JSON.stringify(postData),
       headers: new Headers({
@@ -174,7 +184,7 @@ onMounted(() => {
   let login = JSON.parse(window.localStorage.getItem('pikpakLoginData') || '{}')
   if(login.username && login.password) {
     loginData.value = login
-    loginSwitch.value = true 
+    loginSwitch.value = true
   }
   let proxy = JSON.parse(window.localStorage.getItem('proxy') || '[]')
   if(proxy.length) {
@@ -188,7 +198,7 @@ const goTelegram = () => {
     window.$message.error('请先登陆')
     return false
   }
-  
+
   let matchArray = telegramUrl.value &&  decodeURIComponent(telegramUrl.value).match(/(^|&)token=([^&]*)(&|$)/)
   console.log(matchArray)
   if(!matchArray || !matchArray.length || matchArray.length != 4) {

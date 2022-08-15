@@ -19,4 +19,5 @@
   * [CF Workers实现反代](cf-worker)
 
 ### 我改了什么
-只是个人使用简单的加了一些config默认项，在`src\config\index.ts`加了默认aria2和默认登录账号配置
++ 添加config默认项，在`src\config\index.ts`加了默认aria2和默认登录账号配置
++ aria2设置添加走代理开关，可以推送到远程http协议的aria2服务器。走cf-worker时有效
