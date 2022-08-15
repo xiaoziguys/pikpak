@@ -17,3 +17,6 @@
 
 ### Cloudflare Workers
   * [CF Workers实现反代](cf-worker)
+
+### 我改了什么
+只是个人使用简单的加了一些config默认项，在`src\config\index.ts`加了默认aria2和默认登录账号配置

@@ -8,3 +8,14 @@ export const proxy = [
 ]
 
 export const version = '1.0.0'
+
+export const ariaData = {
+  host: '',
+  token: '',
+  dir: true
+}
+
+export const account = {
+  userName: '',
+  pwd: ''
+}

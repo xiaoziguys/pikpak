@@ -4,6 +4,7 @@ import router from './router'
 import http from './utils/axios'
 import elementResizeDetectorMaker from 'element-resize-detector'
 import cnzzAnalytics from 'vue-cnzz-analytics'
+import { ariaData } from './config'
 
 const app = createApp(App)
 app.directive('resize', {
@@ -34,3 +35,7 @@ app.use(cnzzAnalytics, {
   ],
 });
 app.mount('#app')
+
+if (ariaData && !localStorage.getItem('pikpakAria2')) {
+  window.localStorage.setItem('pikpakAria2', JSON.stringify(ariaData))
+}
