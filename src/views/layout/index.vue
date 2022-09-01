@@ -30,14 +30,14 @@
         <p style="margin-bottom: 0;">
           <n-popover :width="210" placement="right">
               <template #trigger>
-                <a style="color: #306eff;" target="_blank" href="https://s.click.taobao.com/Tvz1XUu">购买开通会员畅享10TB云盘空间，无限云传输次数，高清无损画质</a>
+                <a style="color: #306eff;" target="_blank" href="https://s.click.taobao.com/Gsv0iUu">购买开通会员畅享10TB云盘空间，无限云传输次数，高清无损画质</a>
               </template>
                 <template #header>
                   <n-text strong  depth="1">
                     体验会员单账户只限使用一次
                   </n-text>
                 </template>
-              <img src="../../assets/taobao.png" style="width: 180px; height: 180px;" alt="">
+              <img src="../../assets/taobao1.png" style="width: 180px; height: 180px;" alt="">
               <div style="text-align: center"><b>扫码购买</b></div>
           </n-popover>
         </p>
@@ -82,12 +82,12 @@
       </template>
       <n-input placeholder="会员码" v-model:value="code"></n-input>
       <p>
-        <a style="color: #306eff;" target="_blank" href="https://s.click.taobao.com/Tvz1XUu">购买开通会员畅享10TB云盘空间，无限云传输次数，高清无损画质</a>&nbsp;&nbsp;
+        <a style="color: #306eff;" target="_blank" href="https://s.click.taobao.com/Gsv0iUu">购买开通会员畅享10TB云盘空间，无限云传输次数，高清无损画质</a>&nbsp;&nbsp;
         <n-popover :width="180" placement="bottom">
               <template #trigger>
                 <n-text strong type="info" style="cursor: pointer;">扫码购买</n-text>
               </template>
-              <img src="../../assets/taobao.png" style="width: 180px; height: 180px;" alt="">
+              <img src="../../assets/taobao1.png" style="width: 180px; height: 180px;" alt="">
           </n-popover>
       </p>
 
